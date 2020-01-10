@@ -1,13 +1,11 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { useSaveData } from 'react-adaptive-hooks/save-data';
 import { useHardwareConcurrency } from 'react-adaptive-hooks/hardware-concurrency';
 import { useMemoryStatus } from 'react-adaptive-hooks/memory';
+import Cat from './Cat'
 
-const Full = lazy(() => import('./Full'));
-const Light = lazy(() => import('./Light'));
-
-const CatMeme = () => {
+const Content = () => {
   const { effectiveConnectionType } = useNetworkStatus(); // slow-2g, 2g, 3g, 4g
   const { saveData } = useSaveData();
   const { numberOfLogicalProcessors } = useHardwareConcurrency();
@@ -19,11 +17,9 @@ const CatMeme = () => {
       <p>saveData: {saveData ? 'true' : 'false'}</p>
       <p>numberOfLogicalProcessors: {numberOfLogicalProcessors}</p>
       <p>memoryStatus: {JSON.stringify(memoryStatus)}</p>
-      <Suspense fallback={<div>Loading...</div>}>
-        { effectiveConnectionType === '4g' && !saveData ? <Full /> : <Light /> }
-      </Suspense>
+      { effectiveConnectionType === '4g' && !saveData && <Cat /> }
     </div>
   )
 }
 
-export default CatMeme
+export default Content

@@ -1,10 +1,12 @@
 import React from 'react';
-import CatMeme from './components/CatMeme'
+// import Content from './components/Content'
+import ModelViewer from './components/ModelViewer';
 
 function App() {
   return (
     <div className="App">
-      <CatMeme />
+      {/* <Content /> */}
+      <ModelViewer />
     </div>
   );
 }
